@@ -1,25 +1,26 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Analysis</title>
-    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="./static/index.css">
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="#index.html">Home</a></li>
+            <li><a href="./index.html">Home</a></li>
             <li><a href="./result.html">Text Analysis</a></li>
-            <li><a href="#headlines">Headlines</a></li>
+            <li><a href="./headlines.html">Headlines</a></li>
             <li><a href="./contact.html">Contact Us</a></li>
         </ul>
     </nav>
-    
+    <div class="box">
+    <h1><i><div class="header">Analysis</div></i></h1>
+</div>
     <section id="input-section">
-        <form action="../templates/result.html" method="post">
-            <div class="enter-text-label">Enter Text:</div><br>
+        <form action="./result.html" method="post">
+            <div class="enter-text-label"><i>Enter text you want to Analysis</i></div><br>
             <textarea id="user_input" name="user_input" rows="4" cols="50" required></textarea><br>
             <button type="submit">Submit</button>
         </form>

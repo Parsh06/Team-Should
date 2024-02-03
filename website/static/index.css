@@ -1,70 +1,109 @@
 body {
     background-image: url(../static/images/sss.jpg);
     background-repeat: no-repeat;
-    background-size:100%;
+    background-size: cover;
     background-color: rgba(0, 0, 0, 0.1);
     background-position: center;
     font-family: Arial, sans-serif;
     margin: 0;
     display: flex;
     flex-direction: column;
-    align-items:center;
-    justify-content:space-between;
+    align-items: center;
     height: 100vh;
+    overflow: hidden; /* Hide scrollbar */
 }
 
+nav {
+    margin-left: 20px;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    padding-top: 20px;
+    margin-bottom: 70px;
+}
 
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 2em;
+}
+
+nav li {
+    margin-right: 1em;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: slategrey;
+}
+
+.box{
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-right: 40px;
+    text-align: center;
+    background: lightgrey;
+    height: 60px;
+    width: 470px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    border: 3px solid black;
+
+}
+.header{
+    margin-top: -15px;
+    margin-bottom: 2000px;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    text-align: center;
+}
 #input-section {
-    margin-top: 120px;
+    margin-top: 100px;
     text-align: center;
     flex: 1;
 }
 
 form {
+    font-family: 'Times New Roman', Times, serif;
     max-width: 700px;
-    width: 500px;
-    height: 270px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: whitesmoke;
+    width: 80%; /* Adjust width for responsiveness */
+    margin: 0, auto;
+    padding: 40px;
+    background-color: lightgrey;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     justify-content: center;
-    margin-top: 50px;
-    border: 5px solid black;
-
+    margin-top: -60px;
+    border: 3px solid black;
 }
 
-
-
-/* label {
-    display: block;
-    margin-left: 7px;
-    color: #333;
-    text-align:justify;
-    font-weight: bolder;
-    height: 100px;
-    
-} */
-
 .enter-text-label {
-    color: #333; 
+    color: black;
     font-weight: bold;
     text-align: center;
     padding-bottom: 0px;
     margin-bottom: 0px;
+    font-size:xx-large
 }
-   
-
 
 textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    box-sizing:border-box;
+    box-sizing: border-box;
     height: 172px;
-    
-    
 }
 
 button {
@@ -80,39 +119,24 @@ button {
 button:hover {
     background-color: #555;
 }
-nav {
-    margin-left: 20px;
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    width: 100%;
-    height: 50px;
-    padding-top: 20px;
-}
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content:flex-start;
-    font-size: xx-large;
-}
+/* Media Queries for responsiveness */
+@media screen and (max-width: 800px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
 
-nav li {
-    margin-right: 27px;
-    font-size: xx-large;
+    nav li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
 
-}
+    #input-section {
+        margin-top: 70px;
+    }
 
-nav a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    transition: color 0.3s ease; 
-}
-
-nav a:hover {
-    color:slategrey
+    form {
+        width: 90%; /* Adjust as needed */
+    }
 }

@@ -21,5 +21,9 @@ def result():
 def contact():
     return render_template('contact.html')
 
+@app.route('/heading.html', methods=['GET', 'POST'])
+def heading():
+    return render_template('heading.html')
+
 if __name__ == '__main__':
     app.run(debug=True, port=5500)
