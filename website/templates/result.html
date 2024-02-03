@@ -11,10 +11,10 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="index.html">Text Analysis</a></li>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./result.html">Text Analysis</a></li>
             <li><a href="#headlines">Headlines</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="./contact.html">Contact Us</a></li>
         </ul>
     </nav>
     
@@ -26,7 +26,7 @@
     <div id="analysis-box">
         <h2>Analysis Result:</h2>
         <p>Sentiment Score: {{ sentiment_score }}</p>
-        <p>Offensive Words: {{ offensive_words|join(', ') }}</p>
+        <p>Subjectivity Score: {{ subjectivity_score }}</p>
     </div>
     
 </body>
