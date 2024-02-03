@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Analysis</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> -->
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#text-analysis">Text Analysis</a></li>
+            <li><a href="#headlines">Headlines</a></li>
+            <li><a href="#contact-us">Contact Us</a></li>
+        </ul>
+    </nav>
+    <!-- <div class="header">
+        <h1>NAME</h1>
+    </div> -->
+    <section id="input-section">
+        <form action="/analyze" method="post">
+            <div class="enter-text-label">Enter Text:</div><br>
+            <textarea id="user_input" name="user_input" rows="4" cols="50" required></textarea><br>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+</body>
+</html>
