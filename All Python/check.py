@@ -1,29 +1,21 @@
 import pandas as pd
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-# Load the dataset
-df = pd.read_csv('Team-Should/Data set/indian_express_political_article_one_year_scraped.csv')
+def load_corpus(file_path):
+    corpus_df = pd.read_csv(file_path)
+    left_words = corpus_df['Left'].dropna().str.lower().tolist()
+    right_words = corpus_df['Right'].dropna().str.lower().tolist()
+    return left_words, right_words
 
-# Predefined words for left-leaning, right-leaning, and neutral
-left_words = ['progressive', 'equality', 'social justice', 'welfare', 'public service']
-right_words = ['conservative', 'individual liberty', 'free market', 'national security', 'traditional values']
-
-# Initialize the SentimentIntensityAnalyzer
-sia = SentimentIntensityAnalyzer()
-
-# Function to check political inclination based on predefined words
-def check_political_inclination(text):
-    # Analyze sentiment of the text
+def check_political_inclination(text, left_words, right_words):
+    sia = SentimentIntensityAnalyzer()
     sentiment_scores = sia.polarity_scores(text)
-    
-    # Check for positive or negative sentiment
+
     if sentiment_scores['compound'] >= 0.05:
         return "Neutral or no clear political inclination"
     elif sentiment_scores['compound'] <= -0.05:
-        # Check for predefined left-leaning words
         if any(word in text.lower() for word in left_words):
             return "Left-leaning"
-        # Check for predefined right-leaning words
         elif any(word in text.lower() for word in right_words):
             return "Right-leaning"
         else:
@@ -31,8 +23,17 @@ def check_political_inclination(text):
     else:
         return "Neutral or no clear political inclination"
 
-# Iterate through rows in the dataset and print political inclination
-for index, row in df.iterrows():
-    article_text = row['News Content']  # Replace 'your_actual_column_name' with the correct column name
-    result = check_political_inclination(article_text)
-    print(f"Article {index + 1}: {result}")
+def analyze_articles(article_df, left_words, right_words):
+    for index, row in article_df.iterrows():
+        article_text = row['News Content'].lower()
+        result = check_political_inclination(article_text, left_words, right_words)
+        print(f"Article {index + 1}: {result}")
+
+if __name__ == "__main__":
+    corpus_file_path = 'Team-Should/Data set/Political Corpus - Sheet1.csv'
+    article_file_path = 'Team-Should/Data set/indian_express_political_article_one_year_scraped.csv'
+
+    left_words, right_words = load_corpus(corpus_file_path)
+    article_df = pd.read_csv(article_file_path)
+
+    analyze_articles(article_df, left_words, right_words)
