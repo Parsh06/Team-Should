@@ -9,11 +9,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items:center;
-    justify-content:space-between;
+    /* justify-content:space-between; */
     height: 100vh;
 }
 
     nav {
+        align-items: center;
         margin-left: 20px;
         background-color: #333;
         color: white;
@@ -21,6 +22,7 @@ body {
         width: 100%;
         height: 50px;
         padding-top: 20px;
+        margin-bottom:27px;
         
     }
     nav ul {
@@ -52,6 +54,7 @@ body {
 
     #input-section,
     #result-section {
+        align-items: first baseline;
         padding: 20px;
         text-align: center;
     }
@@ -59,7 +62,7 @@ body {
     form {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items:end;
     }
     
     textarea {
@@ -70,10 +73,9 @@ body {
         margin-top: 10px;
     }
     
-    #user-input-box,
-    #analysis-box {
-        display: inline-block;
-        width: 45%;
+    #user-input-box,#analysis-box {
+        display:inline-block;
+        width: 25%;
         padding: 20px;
         margin: 10px;
         border: 1px solid #ccc;
