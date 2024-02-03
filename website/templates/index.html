@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Analysis</title>
     <link rel="stylesheet" href="./static/index.css">
 </head>
+
 <body>
     <nav>
         <ul>
@@ -19,41 +21,38 @@
         <h1><i><div class="header">Analysis</div></i></h1>
     </div>
     <section id="input-section">
-        <form id="analysis-form" action="./result.html" method="post">
+        <form id="analysis-form" action="/submit_analysis" method="post">
             <div class="enter-text-label"><i>Enter text you want to Analyze</i></div><br>
             <textarea id="user_input" name="user_input" rows="4" cols="50" required></textarea><br>
             <button type="button" onclick="submitForm()">Submit</button>
         </form>
     </section>
-
     <script>
-        function saveToCSV(userInput) {
-           
-            var blob = new Blob([userInput], { type: 'text/csv' });
-    
-           
-            var link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'user_input.csv';
-    
-           
-            document.body.appendChild(link);
-    
-          
-            link.click();
-    
-           
-            document.body.removeChild(link);
-        }
-
-        function submitForm() {
-            
+        async function submitForm() {
             var userInput = document.getElementById('user_input').value;
-            
-          
-            saveToCSV(userInput);
-            document.getElementById('analysis-form').submit();
+    
+            // Save the user input to a file on the server
+            await saveUserInput(userInput);
+    
+            // Redirect to result.html
+            window.location.href = `result.html?user_input=${encodeURIComponent(userInput)}`;
+        }
+    
+        async function saveUserInput(userInput) {
+            try {
+                await fetch('save_user_input', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                    },
+                    body: JSON.stringify({ user_input: userInput }),
+                });
+            } catch (error) {
+                console.error('Error saving user input:', error);
+            }
         }
     </script>
+    
 </body>
+
 </html>

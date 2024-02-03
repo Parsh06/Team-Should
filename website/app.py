@@ -1,6 +1,22 @@
-from flask import Flask, render_template, redirect, url_for, request, send_file
+from flask import Flask, render_template, redirect, url_for, request
+from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
+# Use triple slashes for relative paths in SQLite URI
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
+# Suppress a warning message
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+class ContactForm(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    subject = db.Column(db.String(100), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+
+# Don't create tables here, create them in the main block
 
 @app.route('/')
 def home1():
@@ -10,35 +26,51 @@ def home1():
 def home():
     return render_template('index.html')
 
-@app.route('/submit_contact_form', methods=['GET', 'POST'])
-def submit_contact_form():
-    if request.method == 'POST':
-        user_input = request.form.get('user_input')
+@app.route('/submit_analysis', methods=['POST'])
+def submit_analysis():
+    user_input = request.form['user_input']
+
+    # Save user input to a file
+    with open('user_input.txt', 'w') as file:
+        file.write(user_input)
+
+    return redirect(url_for('result', user_input=user_input))
+@app.route('/save_user_input', methods=['POST'])
+def save_user_input():
+    try:
+        data = request.json
+        user_input = data.get('user_input', '')
         
-        # Save user_input to a file on the server
-        with open('Team-Should/Data set/user_input.csv', 'w') as file:
+        # Save user input to a file
+        with open('user_input.txt', 'w') as file:
             file.write(user_input)
-        
-        # Redirect to home route
-        return redirect(url_for('index.html'))
-    else:
-        # Handle GET request, if needed
-        return render_template('submit_contact_form.html')  # Add a template for this if necessary
 
-@app.route('/download_user_input')
-def download_user_input():
-    # Send the user_input.csv file to the user for download
-    return send_file('Team-Should/Data set/user_input.csv', as_attachment=True)
-
-# Add routes for additional pages
+        return '', 200  # Return success status
+    except Exception as e:
+        print('Error saving user input:', str(e))
+        return '', 500  # Return internal server error status
 @app.route('/result.html')
 def result():
-    # Add logic or rendering for result.html
-    return render_template('result.html')
+    user_input = request.args.get('user_input', '')
+    # Perform additional logic if needed
 
-@app.route('/contact.html')
+    return render_template('result.html', user_input=user_input)
+
+@app.route('/contact.html', methods=['GET', 'POST'])
 def contact():
-    # Add logic or rendering for contact.html
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+
+        new_contact = ContactForm(name=name, email=email, subject=subject, message=message)
+        db.session.add(new_contact)
+        db.session.commit()
+
+        # Redirect to home route after form submission
+        return redirect(url_for('home1'))  # Corrected the route
+
     return render_template('contact.html')
 
 @app.route('/heading.html')
@@ -47,4 +79,7 @@ def heading():
     return render_template('heading.html')
 
 if __name__ == '__main__':
+    # Create the database tables before running the app
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, port=5500)
