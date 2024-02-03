@@ -53,7 +53,7 @@ nav a:hover {
     margin-left: 30px;
     margin-right: 40px;
     text-align: center;
-    background: lightgrey;
+    background: whitesmoke;
     height: 60px;
     width: 470px;
     font-family: 'Times New Roman', Times, serif;
@@ -81,7 +81,7 @@ form {
     width: 80%; /* Adjust width for responsiveness */
     margin: 0, auto;
     padding: 40px;
-    background-color: lightgrey;
+    background-color: whitesmoke;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     justify-content: center;

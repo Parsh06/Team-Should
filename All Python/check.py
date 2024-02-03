@@ -52,7 +52,7 @@ def export_to_csv(df, output_file):
 def visualize_results(results):
     result_df = pd.DataFrame(results)
     result_counts = result_df['Result'].value_counts()
-    
+
     plt.bar(result_counts.index, result_counts.values, color=['blue', 'red', 'green'])
     plt.title('Distribution of Political Inclination')
     plt.xlabel('Political Inclination')

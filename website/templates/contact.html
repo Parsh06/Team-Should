@@ -18,7 +18,7 @@
 
     <section id="contact-form">
         <h1>Contact Us</h1>
-        <form action="/submit_contact_form" method="post">
+        <form action="/submit_contact_form" method="post" onsubmit="return redirectToIndex()">
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -35,6 +35,13 @@
         </form>
     </section>
 
-    
+    <script>
+        function redirectToIndex() {
+            // You can perform any additional form validation here if needed
+            // Redirect to index.html
+            window.location.href = "index.html";
+            return false; // Prevent the default form submission
+        }
+    </script>
 </body>
 </html>

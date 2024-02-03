@@ -1,28 +1,49 @@
-# Your Flask app code
-
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, send_file
 
 app = Flask(__name__)
 
 @app.route('/')
+def home1():
+    return render_template('index.html')
+
+@app.route('/index.html')
 def home():
     return render_template('index.html')
 
-@app.route('/result.html', methods=['GET', 'POST'])
-def result():
+@app.route('/submit_contact_form', methods=['GET', 'POST'])
+def submit_contact_form():
     if request.method == 'POST':
-        # Your result handling logic for POST requests goes here
-        return render_template('result.html')
+        user_input = request.form.get('user_input')
+        
+        # Save user_input to a file on the server
+        with open('Team-Should/Data set/user_input.csv', 'w') as file:
+            file.write(user_input)
+        
+        # Redirect to home route
+        return redirect(url_for('index.html'))
     else:
-        # Your logic for handling GET requests goes here (if needed)
-        return render_template('result.html')  # You may want to render a different template for GET requests
+        # Handle GET request, if needed
+        return render_template('submit_contact_form.html')  # Add a template for this if necessary
 
-@app.route('/contact.html', methods=['GET', 'POST'])
+@app.route('/download_user_input')
+def download_user_input():
+    # Send the user_input.csv file to the user for download
+    return send_file('Team-Should/Data set/user_input.csv', as_attachment=True)
+
+# Add routes for additional pages
+@app.route('/result.html')
+def result():
+    # Add logic or rendering for result.html
+    return render_template('result.html')
+
+@app.route('/contact.html')
 def contact():
+    # Add logic or rendering for contact.html
     return render_template('contact.html')
 
-@app.route('/heading.html', methods=['GET', 'POST'])
+@app.route('/heading.html')
 def heading():
+    # Add logic or rendering for heading.html
     return render_template('heading.html')
 
 if __name__ == '__main__':
