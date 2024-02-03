@@ -12,21 +12,22 @@
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#text-analysis">Text Analysis</a></li>
+            <li><a href="index.html">Text Analysis</a></li>
             <li><a href="#headlines">Headlines</a></li>
             <li><a href="#contact-us">Contact Us</a></li>
         </ul>
     </nav>
-    <section id="result-section">
-        <div id="user-input-box">
-            <h2>User Input:</h2>
-            <div id="user-input">{{ user_input }}</div>
-        </div>
-        <div id="analysis-box">
-            <h2>Analysis Result:</h2>
-            <p>Sentiment Score: {{ sentiment_score }}</p>
-            <p>Offensive Words: {{ offensive_words|join(', ') }}</p>
-        </div>
-    </section>
+    
+    <div id="user-input-box">
+        <h2>User Input:</h2>
+        <div id="user-input">{{ user_input }}</div>
+    </div>
+    
+    <div id="analysis-box">
+        <h2>Analysis Result:</h2>
+        <p>Sentiment Score: {{ sentiment_score }}</p>
+        <p>Offensive Words: {{ offensive_words|join(', ') }}</p>
+    </div>
+    
 </body>
 </html>
