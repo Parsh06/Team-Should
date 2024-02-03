@@ -27,7 +27,7 @@ def check_political_inclination(text, left_words, right_words):
 def analyze_articles(article_df, left_words, right_words):
     results = []
     for index, row in article_df.iterrows():
-        article_text = row['News Content'].lower()
+        article_text = row['Content'].lower()
         result, sentiment_scores = check_political_inclination(article_text, left_words, right_words)
         results.append({
             'Article': index + 1,
@@ -61,7 +61,7 @@ def visualize_results(results):
 
 if __name__ == "__main__":
     corpus_file_path = 'Team-Should/Data set/Political Corpus - Sheet1.csv'
-    article_file_path = 'Team-Should/Data set/indian_express_political_article_one_year_scraped.csv'
+    article_file_path = 'Team-Should/Data set/data.csv'
     output_csv_path = 'Team-Should/Data set/analysis_results.csv'
 
     left_words, right_words = load_corpus(corpus_file_path)
