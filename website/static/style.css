@@ -75,6 +75,21 @@ button {
     font-family: 'Times New Roman', Times, serif; /* Added font-family */
     gap: 20px;
 }
+.done-button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for button hover */
+.done-button:hover {
+    background-color: lightgrey;
+}
 #analysis-box {
     gap: 20px;
     border: 3px solid black;

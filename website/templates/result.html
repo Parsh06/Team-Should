@@ -17,29 +17,13 @@
             <li><a href="./contact.html">Contact Us</a></li>
         </ul>
     </nav>
-    
     <div id="analysis-box"> 
-       <div class="Result"> <h1>Result</h1></div><hr>
+        <div class="Result"> <h1>Result</h1></div><hr>
         <p>User Input: {{ user_input }}</p>
-        <p>Your Result: {{ prediction }}</p>
         <p>Content Classification: {{ content_classification }}</p>
 
-        <!-- Display sentiment analysis results -->
-        {% if analysis_results %}
-            {% for article in analysis_results %}
-                <div>
-                    <h2>Article {{ article['Article'] }}</h2>
-                    <p>Result: {{ article['Result'] }}</p>
-                    <p>Positive: {{ article['Positive'] }}</p>
-                    <p>Negative: {{ article['Negative'] }}</p>
-                    <p>Neutral: {{ article['Neutral'] }}</p>
-                    <p>Compound: {{ article['Compound'] }}</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Your Analysis is Here</p>
-        {% endif %}
-
+        <a href="{{ url_for('home') }}" class="done-button">Done</a>
     </div>
+    
 </body>
 </html>
