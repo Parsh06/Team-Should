@@ -1,16 +1,15 @@
 body {
-    background-image: url(../static/images/sss.jpg);
+    background-image: url(images/sss.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.1);
     background-position: center;
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif; /* Added font-family */
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    overflow: hidden; /* Hide scrollbar */
 }
 
 nav {
@@ -47,23 +46,73 @@ nav a {
 nav a:hover {
     color: slategrey;
 }
+.political-articles {
+    font-family: 'Times New Roman', Times, serif;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
 
-.headline-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
+
+.card {
+    font-family: 'Times New Roman', Times, serif;
+    border:3px solid black;
+    background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
-.headline {
-    margin-bottom: 20px;
-}
-
-.headline h2 {
+h2,h3{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
     color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: bolder;
 }
 
-.headline p {
+/* h3 {
+    color: #555;
+    margin-top: 15px;
+} */
+
+p {
+    font-family: 'Times New Roman', Times, serif;
     color: #666;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.Approach{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    border:3px solid black;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: 100px;
+    width: 1097px;
+}
+
+.About{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    border:3px solid black;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width:1097px;
+        margin-left: 0px;
+        margin-right:57px;
+        text-align: center;
+        /* height: 100px;
+        width: 1270px; */
+    
 }

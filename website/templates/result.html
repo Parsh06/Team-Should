@@ -1,32 +1,45 @@
-<!-- result.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analysis Result</title>
-    <link rel="stylesheet"  href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <nav>
         <ul>
             <li><a href="./index.html">Home</a></li>
             <li><a href="./result.html">Text Analysis</a></li>
-            <li><a href="./heading.html">Headlines</a></li>
+            <li><a href="./heading.html">About Us</a></li>
             <li><a href="./contact.html">Contact Us</a></li>
         </ul>
     </nav>
     
-    <div id="user-input-box">
-        <h2>User Input:</h2>
-        <div id="user-input">{{ user_input }}</div>
+    <div id="analysis-box"> 
+       <div class="Result"> <h1>Result</h1></div><hr>
+        <p>User Input: {{ user_input }}</p>
+        <p>Your Result: {{ prediction }}</p>
+        <p>Content Classification: {{ content_classification }}</p>
+
+        <!-- Display sentiment analysis results -->
+        {% if analysis_results %}
+            {% for article in analysis_results %}
+                <div>
+                    <h2>Article {{ article['Article'] }}</h2>
+                    <p>Result: {{ article['Result'] }}</p>
+                    <p>Positive: {{ article['Positive'] }}</p>
+                    <p>Negative: {{ article['Negative'] }}</p>
+                    <p>Neutral: {{ article['Neutral'] }}</p>
+                    <p>Compound: {{ article['Compound'] }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Your Analysis is Here</p>
+        {% endif %}
+
     </div>
-    
-    <div id="analysis-box">
-        <h2>Analysis Result:</h2>
-        <p>Sentiment Score: {{ sentiment_score }}</p>
-        <p>Subjectivity Score: {{ subjectivity_score }}</p>
-    </div>
-    
 </body>
 </html>

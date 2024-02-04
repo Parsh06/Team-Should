@@ -61,13 +61,16 @@ def visualize_results(results):
 
 if __name__ == "__main__":
     corpus_file_path = 'Team-Should/Data set/Political Corpus - Sheet1.csv'
-    article_file_path = 'Team-Should/Data set/data.csv'
-    output_csv_path = 'Team-Should/Data set/analysis_results.csv'
+    article_file_path = 'user_input.txt'  # Change this line to the path of your new file
 
     left_words, right_words = load_corpus(corpus_file_path)
-    article_df = pd.read_csv(article_file_path)
+
+    with open(article_file_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+
+    article_df = pd.DataFrame({'Content': lines})
 
     analysis_results = analyze_articles(article_df, left_words, right_words)
     article_df_with_analysis = add_analysis_to_dataframe(article_df, analysis_results)
-    export_to_csv(article_df_with_analysis, output_csv_path)
+    export_to_csv(article_df_with_analysis, 'analysis_results.csv')  # Adjust the output file path as needed
     visualize_results(analysis_results)
