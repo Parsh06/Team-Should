@@ -11,16 +11,33 @@
 <body>
     <nav>
         <ul>
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./result.html">Text Analysis</a></li>
-            <li><a href="./heading.html">About Us</a></li>
-            <li><a href="./contact.html">Contact Us</a></li>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('result') }}">Text Analysis</a></li>
+            <li><a href="{{ url_for('heading') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
         </ul>
     </nav>
     <div id="analysis-box"> 
         <div class="Result"> <h1>Result</h1></div><hr>
         <p>User Input: {{ user_input }}</p>
         <p>Content Classification: {{ content_classification }}</p>
+
+        {% if analysis_results %}
+            <h2>Analysis Results</h2>
+            <ul>
+                {% for result in analysis_results %}
+                    <li>
+                        <strong>Article {{ result.Article }}:</strong> {{ result.Result }}
+                        <ul>
+                            <li>Positive: {{ result.Positive }}</li>
+                            <li>Negative: {{ result.Negative }}</li>
+                            <li>Neutral: {{ result.Neutral }}</li>
+                            <li>Compound: {{ result.Compound }}</li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
         <a href="{{ url_for('home') }}" class="done-button">Done</a>
     </div>

@@ -17,12 +17,36 @@ class ContactForm(db.Model):
     subject = db.Column(db.String(100), nullable=False)
     message = db.Column(db.Text, nullable=False)
 
-# Load your model
-model = pickle.load(open('Team-Should/website/Model/model.pkl', 'rb'))
-print (model.predict("user_input.txt"))
+# Load your scikit-learn model
+model_path = os.path.join('website', 'Model', 'model.pkl')
+with open(model_path, 'rb') as file:
+    model = pickle.load(file)
+
 # Define left_words and right_words
-left_words = ['left', 'liberal']  # Add your left-leaning words
-right_words = ['right', 'conservative']  # Add your right-leaning words
+left_words = [
+    'left', 'liberal', 'progressive', 'socialist', 'egalitarian', 'inclusive', 'environmentalist',
+    'activist', 'feminist', 'peaceful', 'tolerant', 'diverse', 'reformist', 'humanitarian',
+    'pro-choice', 'equality', 'worker', 'communal', 'cooperative', 'solidarity', 'liberation',
+    'pacifist', 'progress', 'community', 'social justice', 'open-minded', 'civil rights',
+    'anti-war', 'sustainability', 'green', 'renewable', 'fair trade', 'inclusive', 'empowerment',
+    'multicultural', 'ally', 'progressive tax', 'welfare', 'universal healthcare', 'gun control',
+    'climate change', 'activism', 'grassroots', 'egalitarianism'
+]
+
+right_words = [
+    'right', 'conservative', 'traditional', 'nationalist', 'patriotic', 'capitalist', 'free-market',
+    'individualist', 'limited government', 'self-reliance', 'pro-life', 'law and order', 'authoritarian',
+    'strong defense', 'border security', 'national sovereignty', 'family values', 'religious freedom',
+    'military strength', 'liberty', 'small government', 'free enterprise', 'individual freedom',
+    'entrepreneurship', 'traditional values', 'hard work', 'free speech', 'traditional marriage',
+    'personal responsibility', 'gun rights', 'limited regulation', 'low taxes', 'conservation',
+    'nationalism', 'traditionalism', 'family', 'heritage', 'values', 'private property', 'economic freedom',
+    'individual rights', 'constitutionalism', 'protectionism', 'secure borders', 'patriotism',
+    'protection of life', 'defense spending', 'religious values'
+]
+
+# Add any additional words that you think might be relevant to each category.
+
 
 def check_political_inclination(text, left_words, right_words):
     sia = SentimentIntensityAnalyzer()
@@ -72,7 +96,9 @@ def home():
 
 @app.route('/submit_analysis', methods=['POST'])
 def submit_analysis():
-    user_input = request.form['user_input']
+    # Read the contents of 'user_input.txt'
+    with open('user_input.txt', 'r') as file:
+        user_input = file.read()
 
     # Save user input to a file
     with open('user_input.txt', 'w') as file:
@@ -87,7 +113,8 @@ def submit_analysis():
     # Get the model prediction for user_input
     model_output = model.predict([user_input])[0]  # Assuming model is a text classification model
 
-    return redirect(url_for('result', user_input=user_input, analysis_results=analysis_results, model_output=model_output))
+    return render_template('result.html', user_input=user_input, content_classification=model_output, done_button=True)
+
 
 @app.route('/save_user_input', methods=['POST'])
 def save_user_input():
@@ -110,7 +137,8 @@ def result():
     analysis_results = request.args.get('analysis_results', None)
     model_output = request.args.get('model_output', None)
 
-    return render_template('result.html', user_input=user_input, result=result, analysis_results=analysis_results, model_output=model_output)
+    return render_template('result.html', user_input=user_input, analysis_results=analysis_results, model_output=model_output)
+
 @app.route('/contact.html', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':

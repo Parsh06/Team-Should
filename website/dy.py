@@ -16,7 +16,7 @@ class ContactForm(db.Model):
     message = db.Column(db.Text, nullable=False)
 
 # Load the political corpus data
-political_corpus_data = pd.read_csv('Team-Should/Data set/Political Corpus - Sheet1.csv')
+political_corpus_data = pd.read_csv('Data set/Political Corpus - Sheet1.csv')
 
 def classify_content(text_data):
     text_data_lower = text_data.lower()
